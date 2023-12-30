@@ -10,7 +10,7 @@ updateCanvasSize();
 if ("serviceWorker" in navigator) {
     let registration;
     const registerServiceWorker = async () => {
-        registration = await navigator.serviceWorker.register('./service-worker.js', { scope: `${window.location.origin}${window.location.pathname.substring(0, window.location.pathname.indexOf("/"))}` });
+        registration = await navigator.serviceWorker.register('./service-worker.js', { scope: `${window.location.origin}${window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/"))}/` });
     };
     registerServiceWorker();
 }
