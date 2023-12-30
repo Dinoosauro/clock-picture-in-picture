@@ -14,7 +14,7 @@ if ("serviceWorker" in navigator) {
     };
     registerServiceWorker();
 }
-let appVersion = "1.0.0";
+let appVersion = "1.0.1";
 fetch("./clockpip-updatecode", { cache: "no-store" }).then((res) => res.text().then((text) => { if (text.replace("\n", "") !== appVersion) if (confirm(`There's a new version of ClockPiP. Do you want to update? [${appVersion} --> ${text.replace("\n", "")}]`)) { caches.delete("clockpip-cache"); location.reload(true); } }).catch((e) => { console.error(e) })).catch((e) => console.error(e));
 document.getElementById("version").textContent = appVersion;
 let context = canvas.getContext("2d");
@@ -51,10 +51,10 @@ function generateCanvas() {
     let date = new Date().toTimeString().substring(0, 9).trim();
     context.fillText(date, canvas.width / 2, canvas.height / 2);
     if (document.getElementById("underline").checked) context.fillRect(((canvas.width / 2) - (context.measureText(date).width / 2)), ((canvas.height / 2) + (parseInt(document.getElementById("fontSize").value) / 2)), context.measureText(date).width, parseInt(document.getElementById("fontSize").value) / 10);
-    setTimeout(() => generateCanvas(), isNaN(parseInt(document.getElementById("refreshTime").value)) ? 42 : parseInt(document.getElementById("refreshTime").value));
 }
 addBackgroundImage();
 generateCanvas();
+setInterval(() => {generateCanvas()}, 42);
 video.srcObject = canvas.captureStream();
 video.load();
 for (let item of document.querySelectorAll("[data-save]")) item.addEventListener("change", () => {

@@ -138,6 +138,8 @@ input[type="checkbox"]:checked:after {
     margin-left: 5px;
     margin-right: 5px;
     overflow: auto;
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
 }
 #containerContainer {
     display: flex;
