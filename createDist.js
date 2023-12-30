@@ -21,7 +21,7 @@ CSSPath.forEach(e => {
     checkDist(e);
     fs.writeFileSync(`dist/${e}`, new cleancss().minify(fs.readFileSync(e, "utf-8")).styles)
 })
-let assets = ["manifest.json", "assets/icon.json", "assets/icon.png"];
+let assets = ["manifest.json", "assets/icon.json", "assets/icon.png", "clockpip-updatecode"];
 assets.forEach(e => {
     checkDist(e);
     fs.copyFileSync(e, `dist/${e}`);
