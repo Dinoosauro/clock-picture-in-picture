@@ -1,0 +1,16 @@
+{
+    "name": "ClockPiP",
+    "short_name": "ClockPiP",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#201f1f",
+    "theme_color": "#2f79c3",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "./assets/icon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

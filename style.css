@@ -1,0 +1,146 @@
+:root {
+    --background: #201f1f;
+    --option: #333333;
+    --text: #f0f0f0;
+    --accent: #2f79c3;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    padding: 15px;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.optionContainer {
+    padding: 15px;
+    background-color: var(--option);
+    border-radius: 8px;
+    border: 2px solid var(--text);
+}
+
+#clockSettings>div, #exportContainer > div > div, #advancedSettings > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+
+#clockSettings>div>*, #exportContainer > div > div > *, #advancedSettings > div > * {
+    margin-right: 10px;
+}
+
+video {
+    border: 2px solid var(--text);
+    border-radius: 8px;
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
+    width: -webkit-fill-available;
+    width: -moz-available;
+}
+
+input:not([type=color]), select {
+    accent-color: var(--accent);
+    padding: 10px;
+    border: 1px solid var(--text);
+    background-color: var(--background);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Work Sans';
+}
+select {
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+}
+a {
+    color: var(--text);
+}
+input[type=color] {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: var(--background);
+    height: 35px;
+    width: 75px;
+}
+
+input[type=color]:hover,
+button:hover {
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(160%);
+}
+
+button {
+    appearance: none;
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: var(--accent);
+    font-family: 'Work Sans', sans-serif;
+    color: var(--text);
+    transition: 0.15s ease-in-out;
+    border: 2px solid var(--text);
+}
+
+button:active {
+    filter: brightness(175%);
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--background);
+    margin: 5px;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent);
+}
+
+input[type="checkbox"]:checked:after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    width: 80%;
+    height: 80%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20.285 6.289a1 1 0 0 0-1.414 0l-11.36 11.36-4.95-4.95a1 1 0 1 0-1.414 1.414l5.657 5.657a1 1 0 0 0 1.414 0l12.067-12.067a1 1 0 0 0 0-1.414z"/></svg>') no-repeat center center;
+    background-size: contain;
+}
+[disabled] {
+    transition: opacity 0.15s ease-in-out;
+    opacity: 0.5;
+}
+.opacity {
+    transition: opacity 0.15s ease-in-out
+}
+#forcePlay {
+    text-decoration: underline;
+}
+#forcePlay:hover {
+    cursor: pointer;
+}
+#containerContainer > * {
+    flex: 1 0 400px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    overflow: auto;
+}
+#containerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
