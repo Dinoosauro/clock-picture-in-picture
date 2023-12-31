@@ -64,7 +64,7 @@ if (document.getElementById("showDate").checked) {
         context.font = `${document.getElementById("bold").checked ? "bold " : ""}${document.getElementById("italic").checked ? "italic " : ""}${document.getElementById("dateSize").value}px ${document.getElementById("font").value}`;
         context.textAlign = "left";
         context.textBaseline = "top";    
-        let drawCoords = [document.getElementById("widthLocation").value === "left" ? (canvas.width * 5 / 100) : document.getElementById("widthLocation").value === "center" ? ((canvas.width / 2) - (context.measureText(dateStr).width / 2)) : (canvas.width - (canvas.width * 5 / 100) - context.measureText(dateStr).width), document.getElementById("heightLocation").value === "top" ? (canvas.height * 5 / 100) : canvas.height - (canvas.height * 5 / 100) - context.measureText(dateStr).emHeightDescent];
+        let drawCoords = [document.getElementById("widthLocation").value === "left" ? (canvas.width * 5 / 100) : document.getElementById("widthLocation").value === "center" ? ((canvas.width / 2) - (context.measureText(dateStr).width / 2)) : (canvas.width - (canvas.width * 5 / 100) - context.measureText(dateStr).width), document.getElementById("heightLocation").value === "top" ? (canvas.height * 5 / 100) : canvas.height - (canvas.height * 5 / 100) - parseInt(document.getElementById("dateSize").value)];
         context.fillText(dateStr, drawCoords[0], drawCoords[1]);
     }
     if (new Date().getSeconds() === 59) {
