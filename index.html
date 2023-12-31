@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="apple-touch-icon" href="./assets/icon.png" />
-    <meta name="apple-mobile-web-app-status-bar" content="#201f1f" />
-    <meta name="theme-color" content="#2f79c3" />
+    <link rel="manifest" href="./manifest.json"/>
+    <link rel="apple-touch-icon" href="./assets/icon.png"/>
+    <meta name="apple-mobile-web-app-status-bar" content="#201f1f"/>
+    <meta name="theme-color" content="#2f79c3"/>
+    <link rel="icon" type="image/x-icon" href="/assets/icon.svg">
 
     <title>ClockPiP</title>
 </head>
@@ -33,22 +34,32 @@
             <h2>Customize clock:</h2>
             <div>
                 <img data-img="textsize" width="24" height="24"><label for="fontSize">Font size (in
-                    pixels):</label><input type="number" data-save="fontsize" id="fontSize" value="72">
+                    pixels):</label><input type="number" data-canvasrefresh data-save="fontsize" id="fontSize" value="72">
             </div>
             <div>
-                <img data-img="font" width="24" height="24"><label for="font">Font:</label><input type="text"
-                    data-save="font" id="font" value="Work Sans"><input type="checkbox" id="bold"
-                    data-save="bold"><label for="bold">Bold</label><input type="checkbox" id="italic"
-                    data-save="italic"><label for="italic">Italic</label><input type="checkbox" id="underline"
+                <img data-img="font" width="24" height="24"><label for="font">Font:</label><input data-canvasrefresh type="text"
+                    data-save="font" id="font" value="Work Sans"><input data-canvasrefresh type="checkbox" id="bold"
+                    data-save="bold"><label for="bold">Bold</label><input data-canvasrefresh type="checkbox" id="italic"
+                    data-save="italic"><label for="italic">Italic</label><input data-canvasrefresh type="checkbox" id="underline"
                     data-save="underline"><label for="underline">Underline</label>
             </div>
             <div>
                 <img data-img="backgroundcolor" width="24" height="24"><label for="backgroundColor">Background
-                    color:</label><input data-save="bcolor" type="color" id="backgroundColor" value="#333333">
+                    color:</label><input data-canvasrefresh data-save="bcolor" type="color" id="backgroundColor" value="#333333">
             </div>
             <div>
                 <img data-img="textcolor" width="24" height="24"><label for="textColor">Text color:</label><input
                     data-save="tcolor" type="color" id="textColor" value="#f0f0f0">
+            </div>
+            <div>
+                <input type="checkbox" id="showDate" data-canvasrefresh data-save="showdate"><label for="showDate">Show the date in the <select style="width: auto;" id="heightLocation"data-canvasrefresh data-save="heightlocation">
+                <option value="top">top</option>
+                <option value="bottom" selected>bottom</option>
+            </select><select style="width: auto;" id="widthLocation" data-canvasrefresh data-save="widthlocation">
+            <option value="left">left</option>
+            <option selected value="center">center</option>
+            <option value="right">right</option>
+        </select> part of the screen with <input type="number" data-canvasrefresh id="dateSize" style="width: 55px;" value="55" data-save="datesize"> px</label>
             </div>
             <div>
                 <button id="addBackgroundImg">Use a background image</button><button id="removeBackgroundImg">Remove the
@@ -104,6 +115,9 @@
                 <img data-img="vidresize" width="24" height="24">
                 <l>Video size (in px; width/height)</l><input type="number" id="canvasWidth" value="1920"><input
                     type="number" id="canvasHeight" value="1080">
+            </div>
+            <div>
+                <input type="checkbox" id="quickUpdate" data-save="quickupdate"><label for="quickUpdate">Update as quickly as possible the clock when a minute passes</label>
             </div>
             <div>
                 <button style="width: 100%;" id="deviceWidth">Use device width/height</button>

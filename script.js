@@ -14,7 +14,7 @@ if ("serviceWorker" in navigator) {
     };
     registerServiceWorker();
 }
-let appVersion = "1.0.1";
+let appVersion = "1.1.0";
 fetch("./clockpip-updatecode", { cache: "no-store" }).then((res) => res.text().then((text) => { if (text.replace("\n", "") !== appVersion) if (confirm(`There's a new version of ClockPiP. Do you want to update? [${appVersion} --> ${text.replace("\n", "")}]`)) { caches.delete("clockpip-cache"); location.reload(true); } }).catch((e) => { console.error(e) })).catch((e) => console.error(e));
 document.getElementById("version").textContent = appVersion;
 let context = canvas.getContext("2d");
@@ -22,7 +22,13 @@ let isCustomImage = false;
 document.getElementById("forcePlay").addEventListener("click", () => {
     video.play();
 })
-function generateCanvas() {
+let is59Seconds = false;
+function generateCanvas(setNewTimeout) {
+    if (is59Seconds && new Date().getMilliseconds() < (document.getElementById("quickUpdate").checked ? 900 : 949) && !setNewTimeout) {
+        setTimeout(() => {is59Seconds = false}, 1400);
+        setTimeout(() => {generateCanvas()}, document.getElementById("quickUpdate").checked ? 29 : 57);
+        return;
+    }
     if (!isCustomImage) {
         context.fillStyle = document.getElementById("backgroundColor").value;
         context.fillRect(0, 0, canvas.width, canvas.height);
@@ -48,13 +54,27 @@ function generateCanvas() {
     context.font = `${document.getElementById("bold").checked ? "bold " : ""}${document.getElementById("italic").checked ? "italic " : ""}${document.getElementById("fontSize").value}px ${document.getElementById("font").value}`;
     context.textAlign = "center";
     context.textBaseline = "middle";
-    let date = new Date().toTimeString().substring(0, 9).trim();
+    let date = new Date()
+    if (date.getSeconds() === 59 && date.getMilliseconds() > document.getElementById("quickUpdate").checked ? 900 : 949) date = new Date(date.getTime() + 100);
+    let dateStr = date.toLocaleDateString();
+        date = date.toTimeString().substring(0, 9).trim();
     context.fillText(date, canvas.width / 2, canvas.height / 2);
     if (document.getElementById("underline").checked) context.fillRect(((canvas.width / 2) - (context.measureText(date).width / 2)), ((canvas.height / 2) + (parseInt(document.getElementById("fontSize").value) / 2)), context.measureText(date).width, parseInt(document.getElementById("fontSize").value) / 10);
+if (document.getElementById("showDate").checked) {
+        context.font = `${document.getElementById("bold").checked ? "bold " : ""}${document.getElementById("italic").checked ? "italic " : ""}${document.getElementById("dateSize").value}px ${document.getElementById("font").value}`;
+        context.textAlign = "left";
+        context.textBaseline = "top";    
+        let drawCoords = [document.getElementById("widthLocation").value === "left" ? (canvas.width * 5 / 100) : document.getElementById("widthLocation").value === "center" ? ((canvas.width / 2) - (context.measureText(dateStr).width / 2)) : (canvas.width - (canvas.width * 5 / 100) - context.measureText(dateStr).width), document.getElementById("heightLocation").value === "top" ? (canvas.height * 5 / 100) : canvas.height - (canvas.height * 5 / 100) - context.measureText(dateStr).emHeightDescent];
+        context.fillText(dateStr, drawCoords[0], drawCoords[1]);
+    }
+    if (new Date().getSeconds() === 59) {
+        is59Seconds = true;
+        setTimeout(() => {generateCanvas()}, document.getElementById("quickUpdate").checked ? 29 : 57);
+    }
+    if (setNewTimeout) setTimeout(() => {generateCanvas(true)}, 1000 - new Date().getMilliseconds());
 }
 addBackgroundImage();
-generateCanvas();
-setInterval(() => {generateCanvas()}, 42);
+generateCanvas(true);
 video.srcObject = canvas.captureStream();
 video.load();
 for (let item of document.querySelectorAll("[data-save]")) item.addEventListener("change", () => {
@@ -63,7 +83,7 @@ for (let item of document.querySelectorAll("[data-save]")) item.addEventListener
     localStorage.setItem("ClockPiP-InputVal", JSON.stringify(parseItem));
 })
 let getPrevSettings = JSON.parse(localStorage.getItem("ClockPiP-InputVal") ?? "{}");
-for (let item in getPrevSettings) document.querySelector(`[data-save=${item}]`)[document.querySelector(`[data-save=${item}]`).type === "checkbox" ? "checked" : "value"] = getPrevSettings[item];
+for (let item in getPrevSettings) if ((document.querySelector(`[data-save=${item}]`) ?? "") !== "") document.querySelector(`[data-save=${item}]`)[document.querySelector(`[data-save=${item}]`).type === "checkbox" ? "checked" : "value"] = getPrevSettings[item];
 document.getElementById("enablePip").addEventListener("click", () => {
     video.requestPictureInPicture();
 })
@@ -201,3 +221,4 @@ function getImg(icon, item) {
     item.src = URL.createObjectURL(new Blob([imgStore[icon].replaceAll("#212121", getComputedStyle(document.body).getPropertyValue("--accent"))], {type: "image/svg+xml"}));
 }
 for (let item of document.querySelectorAll("[data-img]")) getImg(item.getAttribute("data-img"), item);
+for (let item of document.querySelectorAll("[data-canvasrefresh]")) item.addEventListener("change", () => {generateCanvas()})
