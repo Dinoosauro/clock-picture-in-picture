@@ -33,22 +33,32 @@
             <h2>Customize clock:</h2>
             <div>
                 <img data-img="textsize" width="24" height="24"><label for="fontSize">Font size (in
-                    pixels):</label><input type="number" data-save="fontsize" id="fontSize" value="72">
+                    pixels):</label><input type="number" data-canvasrefresh data-save="fontsize" id="fontSize" value="72">
             </div>
             <div>
-                <img data-img="font" width="24" height="24"><label for="font">Font:</label><input type="text"
-                    data-save="font" id="font" value="Work Sans"><input type="checkbox" id="bold"
-                    data-save="bold"><label for="bold">Bold</label><input type="checkbox" id="italic"
-                    data-save="italic"><label for="italic">Italic</label><input type="checkbox" id="underline"
+                <img data-img="font" width="24" height="24"><label for="font">Font:</label><input data-canvasrefresh type="text"
+                    data-save="font" id="font" value="Work Sans"><input data-canvasrefresh type="checkbox" id="bold"
+                    data-save="bold"><label for="bold">Bold</label><input data-canvasrefresh type="checkbox" id="italic"
+                    data-save="italic"><label for="italic">Italic</label><input data-canvasrefresh type="checkbox" id="underline"
                     data-save="underline"><label for="underline">Underline</label>
             </div>
             <div>
                 <img data-img="backgroundcolor" width="24" height="24"><label for="backgroundColor">Background
-                    color:</label><input data-save="bcolor" type="color" id="backgroundColor" value="#333333">
+                    color:</label><input data-canvasrefresh data-save="bcolor" type="color" id="backgroundColor" value="#333333">
             </div>
             <div>
                 <img data-img="textcolor" width="24" height="24"><label for="textColor">Text color:</label><input
                     data-save="tcolor" type="color" id="textColor" value="#f0f0f0">
+            </div>
+            <div>
+                <input type="checkbox" id="showDate" data-canvasrefresh data-save="showdate"><label for="showDate">Show the date in the <select style="width: auto;" id="heightLocation"data-canvasrefresh data-save="heightlocation">
+                <option value="top">top</option>
+                <option value="bottom" selected>bottom</option>
+            </select><select style="width: auto;" id="widthLocation" data-canvasrefresh data-save="widthlocation">
+            <option value="left">left</option>
+            <option selected value="center">center</option>
+            <option value="right">right</option>
+        </select> part of the screen with <input type="number" data-canvasrefresh id="dateSize" style="width: 55px;" value="55" data-save="datesize"><l>px</l></label>
             </div>
             <div>
                 <button id="addBackgroundImg">Use a background image</button><button id="removeBackgroundImg">Remove the
